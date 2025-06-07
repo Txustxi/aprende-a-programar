@@ -1,3 +1,4 @@
+"use strict";
 // Almacén de cursos y módulos
 const courses = {
     python: {
@@ -52,12 +53,12 @@ const content = document.getElementById('content');
 const output = document.getElementById('output');
 let currentLang = null;
 
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', (e) => {
+document.querySelector('nav').addEventListener('click', (e) => {
+    if (e.target.tagName.toLowerCase() === 'a') {
         e.preventDefault();
-        const lang = link.getAttribute('href').substring(1);
+        const lang = e.target.getAttribute('href').substring(1);
         showCourse(lang);
-    });
+    }
 });
 
 function showCourse(lang) {
