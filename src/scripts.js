@@ -30,18 +30,26 @@ const courses = {
 // Manejo de tema oscuro
 const themeBtn = document.getElementById('toggle-theme');
 const body = document.body;
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme === 'dark') {
+const storedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const useDark = storedTheme ? storedTheme === 'dark' : prefersDark;
+
+if (useDark) {
     body.classList.add('dark-mode');
+    themeBtn.textContent = 'Modo Claro';
+} else {
+    themeBtn.textContent = 'Modo Oscuro';
 }
 
 themeBtn.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+    const dark = body.classList.toggle('dark-mode');
+    themeBtn.textContent = dark ? 'Modo Claro' : 'Modo Oscuro';
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
 });
 
 // Renderizado de contenido
 const content = document.getElementById('content');
+const output = document.getElementById('output');
 
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -71,10 +79,14 @@ function showCourse(lang) {
 function runCode(code) {
     try {
         const result = eval(code);
-        alert(result !== undefined ? result : 'Código ejecutado');
+        showMessage(result !== undefined ? result : 'Código ejecutado');
     } catch (err) {
-        alert('Error: ' + err.message);
+        showMessage('Error: ' + err.message);
     }
+}
+
+function showMessage(msg) {
+    output.textContent = msg;
 }
 
 // Service Worker para modo offline

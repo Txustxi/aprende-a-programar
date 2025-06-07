@@ -1,9 +1,9 @@
 const cacheName = 'aprende-a-programar-v1';
 const filesToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/scripts.js'
+    './',
+    './index.html',
+    './styles.css',
+    './scripts.js'
 ];
 
 self.addEventListener('install', e => {
