@@ -50,6 +50,7 @@ themeBtn.addEventListener('click', () => {
 // Renderizado de contenido
 const content = document.getElementById('content');
 const output = document.getElementById('output');
+let currentLang = null;
 
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -61,7 +62,13 @@ document.querySelectorAll('nav a').forEach(link => {
 
 function showCourse(lang) {
     const course = courses[lang];
-    if (!course) return;
+    if (!course) {
+        content.innerHTML = '<p>Ruta en desarrollo</p>';
+        output.textContent = '';
+        currentLang = null;
+        return;
+    }
+    currentLang = lang;
     let html = `<h2>${course.titulo}</h2>`;
     course.modulos.forEach((mod, idx) => {
         html += `
@@ -77,6 +84,10 @@ function showCourse(lang) {
 }
 
 function runCode(code) {
+    if (currentLang !== 'javascript') {
+        showMessage('La ejecución de código solo está disponible para JavaScript.');
+        return;
+    }
     try {
         const result = eval(code);
         showMessage(result !== undefined ? result : 'Código ejecutado');
