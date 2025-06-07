@@ -13,6 +13,21 @@ const courses = {
                 titulo: "Listas y Bucles",
                 teoria: "Uso de listas y bucles for para recorrer datos.",
                 codigo: "for i in [1,2,3]:\n    print(i)"
+            },
+            {
+                titulo: "Funciones",
+                teoria: "Definición y llamada de funciones simples.",
+                codigo: "def saluda(nombre):\n    return f'Hola {nombre}'"
+            },
+            {
+                titulo: "Diccionarios",
+                teoria: "Almacena pares clave-valor y recórralos.",
+                codigo: "edades = {'Ana':30,'Luis':25}\nprint(edades['Ana'])"
+            },
+            {
+                titulo: "Programación Orientada a Objetos",
+                teoria: "Crea clases y objetos básicos en Python.",
+                codigo: "class Persona:\n    def __init__(self,n):\n        self.nombre=n\np=Persona('Ana')\nprint(p.nombre)"
             }
         ]
     },
@@ -23,6 +38,66 @@ const courses = {
                 titulo: "Variables",
                 teoria: "Declaración y uso de variables en JavaScript.",
                 codigo: "let saludo = 'Hola';\nconsole.log(saludo);"
+            },
+            {
+                titulo: "Funciones",
+                teoria: "Funciones y paso de parámetros.",
+                codigo: "function suma(a,b){return a+b;}\nconsole.log(suma(2,3));"
+            },
+            {
+                titulo: "DOM",
+                teoria: "Manipulación básica del DOM.",
+                codigo: "document.body.style.background='lightblue';"
+            },
+            {
+                titulo: "Promesas",
+                teoria: "Manejo de operaciones asíncronas con Promesas.",
+                codigo: "Promise.resolve('Listo').then(m=>console.log(m));"
+            },
+            {
+                titulo: "Clases",
+                teoria: "Sintaxis de clases en ES6.",
+                codigo: "class Persona{constructor(n){this.nombre=n}}\nconsole.log(new Persona('Ana').nombre);"
+            }
+        ]
+    },
+    java: {
+        titulo: "Java",
+        modulos: [
+            {
+                titulo: "Introducción",
+                teoria: "Sintaxis básica de Java y método main.",
+                codigo: "public class Hola{public static void main(String[] args){System.out.println('Hola');}}"
+            },
+            {
+                titulo: "Tipos de Datos",
+                teoria: "Tipos primitivos y variables.",
+                codigo: "int edad = 30;\ndouble precio = 9.99;"
+            },
+            {
+                titulo: "Clases y Objetos",
+                teoria: "Definición de clases y creación de objetos.",
+                codigo: "class Persona{String n; Persona(String n){this.n=n;}}\nPersona p = new Persona('Ana');"
+            }
+        ]
+    },
+    cpp: {
+        titulo: "C++",
+        modulos: [
+            {
+                titulo: "Introducción",
+                teoria: "Estructura básica de un programa en C++.",
+                codigo: "#include<iostream>\nint main(){std::cout<<'Hola';return 0;}"
+            },
+            {
+                titulo: "Control de Flujo",
+                teoria: "Uso de condicionales y bucles.",
+                codigo: "for(int i=0;i<3;i++){std::cout<<i;}"
+            },
+            {
+                titulo: "Programación Orientada a Objetos",
+                teoria: "Clases y objetos simples.",
+                codigo: "class Persona{public:string nombre;};\nPersona p;\np.nombre='Ana';"
             }
         ]
     }
