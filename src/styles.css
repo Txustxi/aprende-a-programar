@@ -45,6 +45,10 @@ main {
 #quiz-container {
     padding: 1rem;
 }
+#daily-challenge, #certificate {
+    padding: 1rem;
+    text-align: center;
+}
 .done h3::after {
     content: " \2714";
     color: green;

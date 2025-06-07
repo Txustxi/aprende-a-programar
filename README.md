@@ -8,6 +8,8 @@ Aplicación web educativa en español para aprender programación de forma autó
 - Ejemplos ejecutables y teoría concisa.
 - Quizzes interactivos y seguimiento de progreso con gamificación.
 - Insignias por puntos acumulados para motivar tu avance.
+- Reto diario para practicar constantemente y sumar puntos extra.
+- Opción de generar un certificado digital al completar cada ruta.
 - Modo oscuro y funcionamiento offline (Service Worker).
 
 ## Uso

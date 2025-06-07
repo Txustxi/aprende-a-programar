@@ -23,6 +23,16 @@ const courses = {
                     respuesta: 1
                 }
             }
+            ,{
+                titulo: "Funciones",
+                teoria: "Cómo declarar y utilizar funciones en Python.",
+                codigo: "def saludar(nombre):\n    return f'Hola {nombre}'\nprint(saludar('Ana'))",
+                quiz: {
+                    pregunta: "¿Con qué palabra clave se define una función?",
+                    opciones: ["def", "func", "function"],
+                    respuesta: 0
+                }
+            }
         ]
     },
     javascript: {
@@ -35,6 +45,16 @@ const courses = {
                 quiz: {
                     pregunta: "¿Con qué palabra se declara una variable modificable?",
                     opciones: ["let", "const", "var"],
+                    respuesta: 0
+                }
+            },
+            {
+                titulo: "Funciones",
+                teoria: "Definición de funciones y retorno de valores.",
+                codigo: "function cuadrado(n){\n  return n*n;\n}\nconsole.log(cuadrado(4));",
+                quiz: {
+                    pregunta: "¿Cómo se declara una función tradicional?",
+                    opciones: ["function miFunc()", "def miFunc()", "func miFunc"],
                     respuesta: 0
                 }
             }
@@ -81,7 +101,7 @@ if (currentTheme === 'dark') {
 }
 
 // Progreso y gamificación
-let progress = JSON.parse(localStorage.getItem('progress') || '{"points":0,"cursos":{}}');
+let progress = JSON.parse(localStorage.getItem('progress') || '{"points":0,"cursos":{},"ultimoReto":""}');
 updateHUD();
 
 function updateBadges() {
@@ -108,9 +128,10 @@ function updateHUD() {
 
 document.getElementById('reset-progress').addEventListener('click', () => {
     localStorage.removeItem('progress');
-    progress = {points:0,cursos:{}};
+    progress = {points:0,cursos:{},ultimoReto:''};
     updateHUD();
     content.innerHTML = '<p>Progreso reiniciado.</p>';
+    document.getElementById('daily-challenge').classList.add('hidden');
 });
 
 themeBtn.addEventListener('click', () => {
@@ -120,6 +141,34 @@ themeBtn.addEventListener('click', () => {
 
 // Renderizado de contenido
 const content = document.getElementById('content');
+const dailyContainer = document.getElementById('daily-challenge');
+const dailyBtn = document.getElementById('daily-btn');
+const certificateDiv = document.getElementById('certificate');
+
+const dailyChallenges = [
+    'Escribe un programa que calcule la suma de los primeros 10 n\u00FAmeros.',
+    'Crea una funci\u00F3n que verifique si una palabra es pal\u00EDndromo.',
+    'Construye un bucle que imprima los n\u00FAmeros pares del 1 al 20.'
+];
+
+dailyBtn.addEventListener('click', () => {
+    const today = new Date().toISOString().slice(0,10);
+    if (progress.ultimoReto === today) {
+        dailyContainer.innerHTML = '<p>Ya completaste el reto de hoy.</p>';
+    } else {
+        const challenge = dailyChallenges[Math.floor(Math.random()*dailyChallenges.length)];
+        dailyContainer.innerHTML = `<p>${challenge}</p><button id="complete-challenge">Marcar como completado</button>`;
+        document.getElementById('complete-challenge').addEventListener('click', () => {
+            progress.ultimoReto = today;
+            progress.points += 20;
+            saveProgress();
+            updateHUD();
+            dailyContainer.innerHTML = '<p>\u00A1Reto completado!</p>';
+        });
+    }
+    dailyContainer.classList.remove('hidden');
+    content.scrollIntoView();
+});
 
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -145,7 +194,11 @@ function showCourse(lang) {
             </section>
         `;
     });
+    if (checkCourseCompletion(lang)) {
+        html += `<button onclick="downloadCertificate('${lang}')">Descargar Certificado</button>`;
+    }
     content.innerHTML = html;
+    certificateDiv.classList.add('hidden');
 }
 
 function runCode(code) {
@@ -189,6 +242,28 @@ function answerQuiz(lang, idx, choice) {
     }
     updateHUD();
     setTimeout(()=>{container.classList.add('hidden'); showCourse(lang);},1500);
+}
+
+function checkCourseCompletion(lang) {
+    const course = courses[lang];
+    if (!progress.cursos[lang]) return false;
+    const completed = progress.cursos[lang].modulos.filter(Boolean).length;
+    return completed === course.modulos.length;
+}
+
+function downloadCertificate(lang) {
+    const text = `Certificado de finalizaci\u00F3n\nRuta: ${courses[lang].titulo}\nPuntos obtenidos: ${progress.points}`;
+    const blob = new Blob([text], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `certificado-${lang}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+    certificateDiv.innerHTML = '<p>Certificado descargado</p>';
+    certificateDiv.classList.remove('hidden');
 }
 
 // Service Worker para modo offline
