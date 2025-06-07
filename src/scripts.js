@@ -39,6 +39,36 @@ const courses = {
                 }
             }
         ]
+    },
+    java: {
+        titulo: "Java",
+        modulos: [
+            {
+                titulo: "Hola Mundo",
+                teoria: "Estructura básica de un programa en Java.",
+                codigo: "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hola Mundo\");\n    }\n}",
+                quiz: {
+                    pregunta: "¿Con qué método inicia la ejecución un programa en Java?",
+                    opciones: ["start", "main", "run"],
+                    respuesta: 1
+                }
+            }
+        ]
+    },
+    cpp: {
+        titulo: "C++",
+        modulos: [
+            {
+                titulo: "Compilación",
+                teoria: "Ejemplo básico de programa en C++.",
+                codigo: "#include <iostream>\nint main(){\n    std::cout << \"Hola Mundo\";\n    return 0;\n}",
+                quiz: {
+                    pregunta: "¿Qué biblioteca se incluye para imprimir en pantalla?",
+                    opciones: ["stdio.h", "iostream", "stdlib.h"],
+                    respuesta: 1
+                }
+            }
+        ]
     }
 };
 
@@ -54,6 +84,17 @@ if (currentTheme === 'dark') {
 let progress = JSON.parse(localStorage.getItem('progress') || '{"points":0,"cursos":{}}');
 updateHUD();
 
+function updateBadges() {
+    const badges = document.getElementById('badges');
+    badges.innerHTML = '';
+    if (progress.points >= 50) {
+        badges.innerHTML += '<span class="badge">Aprendiz</span>';
+    }
+    if (progress.points >= 100) {
+        badges.innerHTML += '<span class="badge">Experto</span>';
+    }
+}
+
 function saveProgress() {
     localStorage.setItem('progress', JSON.stringify(progress));
 }
@@ -62,6 +103,7 @@ function updateHUD() {
     const level = Math.floor(progress.points / 100) + 1;
     document.getElementById('level').textContent = `Nivel: ${level}`;
     document.getElementById('points').textContent = `Puntos: ${progress.points}`;
+    updateBadges();
 }
 
 document.getElementById('reset-progress').addEventListener('click', () => {

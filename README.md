@@ -7,6 +7,7 @@ Aplicación web educativa en español para aprender programación de forma autó
 - Rutas de aprendizaje por lenguaje (Python, JavaScript, Java, C++).
 - Ejemplos ejecutables y teoría concisa.
 - Quizzes interactivos y seguimiento de progreso con gamificación.
+- Insignias por puntos acumulados para motivar tu avance.
 - Modo oscuro y funcionamiento offline (Service Worker).
 
 ## Uso
