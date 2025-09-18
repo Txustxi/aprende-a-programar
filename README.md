@@ -1,16 +1,16 @@
 # Aprende a Programar
 
-Aplicación web educativa en español para aprender programación de forma autónoma.
+Aplicación web educativa en español para aprender programación de forma autónoma con rutas guiadas para Python, JavaScript, Java y C++.
 
-## Características
+## Características destacadas
 
-- Rutas de aprendizaje por lenguaje (Python, JavaScript, Java, C++). Las rutas que no están disponibles muestran un aviso.
-- Temario ampliado con varios módulos por lenguaje.
-- Ejemplos ejecutables y teoría concisa.
-- Quizzes y seguimiento de progreso local.
-- Modo oscuro automático y funcionamiento offline (Service Worker).
-- Consola integrada para mostrar resultados de código (solo JavaScript).
+- Rutas de aprendizaje curadas con teoría, ejemplos ejecutables y retos prácticos por módulo.
+- Editor interactivo para los módulos de JavaScript con opciones de ejecución, restablecimiento y copiado rápido.
+- Seguimiento de progreso por módulo almacenado en `localStorage` para retomar tu avance cuando quieras.
+- Modo claro/oscuro accesible que recuerda tu preferencia y respeta el tema del sistema.
+- Consola integrada para visualizar resultados y mensajes de ejecución.
+- Funcionamiento offline gracias a un Service Worker que precachea los recursos esenciales.
 
 ## Uso
 
-Abre `src/index.html` en un navegador moderno. La aplicación guarda tu avance en `localStorage`.
+Abre `src/index.html` en un navegador moderno. Todo el estado se guarda localmente en el navegador, por lo que puedes cerrar y volver cuando lo necesites.
