@@ -1,4 +1,4 @@
-const cacheName = 'aprende-a-programar-v1';
+const cacheName = 'aprende-a-programar-v2';
 const filesToCache = [
     './',
     './index.html',
